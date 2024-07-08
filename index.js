@@ -1,6 +1,7 @@
 const express = require("express")
 const mongoose = require("mongoose")
 const cors = require("cors")
+const path = require("path")
 require("dotenv").config()
 
 const app = express()
@@ -8,6 +9,7 @@ const app = express()
 // 2 Middlewares
 app.use(express.static("uploads"))
 app.use(express.json())
+app.use(express.static(path.join(__dirname, "dist")))
 app.use(cors({
     origin: true,
     credentials: true
@@ -19,6 +21,7 @@ app.use("/api/admin", require("./routes/admin.routes"))
 
 // 4 404 Routes
 app.use("*", async (req, res) => {
+    res.sendFile.path.join(__dirname, "dist", "index.html")
     res.status(404).json({ message: "Resource Not Found" })
 })
 
