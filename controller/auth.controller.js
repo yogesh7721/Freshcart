@@ -33,6 +33,7 @@ exports.loginUser = asyncHandler(async (req, res) => {
 
     // 2 verity password
     const verify = await bcrypt.compare(password, result.password)
+
     if (!verify) {
         return res.status(400).json({ message: "Password Do Not Match" })
     }
